@@ -11,7 +11,7 @@ import {debounceTime} from 'rxjs/operators';
 })
 export class ProductFormComponent implements OnInit {
 
-  emailCtrl = new FormControl('', [Validators.required]);
+  emailCtrl = new FormControl('', [Validators.required, Validators.maxLength(10), Validators.minLength(5)]);
 
   constructor() {
     
