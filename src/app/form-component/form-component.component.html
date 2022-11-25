@@ -1,1 +1,36 @@
-<p>form-component works!</p>
+<form [formGroup]="form">
+    <p>
+        Nombre: <br>
+        <input type="text" formControlName = "nameCtrl">
+    </p>
+    <p>
+        Fecha: <br>
+        <input type="date" formControlName = "dateCtrl">
+    </p>
+    <p>
+        Email: <br>
+        <input type="email" formControlName = "emailCtrl">
+    </p>
+
+    <p>
+        Texto largo: <br>
+        <textarea cols="30" rows="10"  formControlName = "textCtrl"></textarea>
+    </p>
+
+    <p>
+        Categoría: <br>
+        <select formControlName="categoryCtrl">
+            <option value="1">Categoria 1</option>
+            <option value="2">Categoria 2</option>
+            <option value="3">Categoria 3</option>
+            <option value="4">Categoria 4</option>
+        </select>
+    </p>
+
+    <p>
+        <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="hombre">Hombre <br>
+        <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="mujer">Mujer <br>
+        <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="otro">Otros <br>
+    </p>
+
+</form>

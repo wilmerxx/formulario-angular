@@ -12,7 +12,7 @@ export class FormComponentComponent implements OnInit {
   form: FormGroup;
 
   constructor() {
-
+    this.buildForm();
     this.form.valueChanges
     .pipe(
       debounceTime(1000)
