@@ -29,8 +29,8 @@ export class FormComponentComponent implements OnInit {
     this.form = this.formBuilder.group({
       nameCtrl: new FormControl('', [Validators.required]),
       dateCtrl: new FormControl('', [Validators.required]),
-      emailCtrl: new FormControl('', [Validators.required]),
-      textCtrl: new FormControl('', [Validators.required]),
+      emailCtrl: new FormControl('', [Validators.required, Validators.email]),
+      textCtrl: new FormControl('', [Validators.required, Validators.maxLength(200)]),
       categoryCtrl: new FormControl('', [Validators.required]),
       genderCtrl: new FormControl('', [Validators.required])
 
@@ -42,8 +42,14 @@ export class FormComponentComponent implements OnInit {
     if(this.form.valid){
       const value = this.form.value;
       console.log(value);
+    }else{
+      this.form.markAllAsTouched();
     }
     
+  }
+
+  get textField(){
+    return this.form.get('textCtrl');
   }
 
  
