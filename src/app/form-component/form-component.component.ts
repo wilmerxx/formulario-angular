@@ -11,22 +11,22 @@ export class FormComponentComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() {
+  constructor(private formBuilder: FormBuilder) {
     this.buildForm();
-    this.form.valueChanges
-    .pipe(
-      debounceTime(1000)
-      )
-    .subscribe(value => {
-      console.log(value);
-    })
+    // this.form.valueChanges
+    // .pipe(
+    //   debounceTime(1000)
+    //   )
+    // .subscribe(value => {
+    //   console.log(value);
+    // })
    }
 
   ngOnInit(): void {
   }
 
   private buildForm(){
-    this.form = new FormGroup({
+    this.form = this.formBuilder.group({
       nameCtrl: new FormControl('', [Validators.required]),
       dateCtrl: new FormControl('', [Validators.required]),
       emailCtrl: new FormControl('', [Validators.required]),
@@ -35,6 +35,12 @@ export class FormComponentComponent implements OnInit {
       genderCtrl: new FormControl('', [Validators.required])
 
     });
+  }
+
+  save(event: Event){
+    event.preventDefault();
+    const value = this.form.value;
+    console.log(value);
   }
 
 }
