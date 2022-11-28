@@ -39,8 +39,13 @@ export class FormComponentComponent implements OnInit {
 
   save(event: Event){
     event.preventDefault();
-    const value = this.form.value;
-    console.log(value);
+    if(this.form.valid){
+      const value = this.form.value;
+      console.log(value);
+    }
+    
   }
+
+ 
 
 }

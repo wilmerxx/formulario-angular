@@ -14,9 +14,13 @@
 
     <p>
         Texto largo: <br>
-        <textarea cols="30" rows="10"  formControlName = "textCtrl"></textarea>
+        <textarea cols="30" rows="10"  formControlName = "textCtrl"></textarea> <br>
+        <small>{{this.form.get('textCtrl')?.value.length}}/200</small>
     </p>
-
+    <div *ngIf="form.get('textCtrl')?.errors && form.get('textCtrl')?.touched">
+        <p *ngIf="form.get('textCtrl')?.hasError('required')">Es un campo requerido</p>
+        <p *ngIf="form.get('textCtrl')?.hasError('maxLength')">Te pasaste, máximo debe contener 200 caracteres.</p>
+    </div>
     <p>
         Categoría: <br>
         <select formControlName="categoryCtrl">
@@ -32,6 +36,6 @@
         <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="mujer">Mujer <br>
         <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="otro">Otros <br>
     </p>
-    <button type="submit">Guardar</button>
+    <button [disabled]="form.invalid" type="submit">Guardar</button>
 
 </form>
