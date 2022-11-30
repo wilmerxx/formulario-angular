@@ -1,41 +1,124 @@
 <form [formGroup]="form" (ngSubmit)="save($event)">
     <p>
-        Nombre: <br>
-        <input type="text" formControlName = "nameCtrl">
+        Nombre completo: <br>
+        <input type="text" name="nameCtrl" id="nameCtrl" formControlName = "nameCtrl">
     </p>
+    <div *ngIf="nameCtrl?.errors && (nameCtrl?.dirty || nameCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="nameCtrl?.hasError('required')">
+        El nombre es requerido
+      </div>
+
+    </div>
+
+    <p>
+        Número de cédula: <br>
+        <input type="number" name="numCtrl" formControlName = "numCtrl">
+    </p>
+
+    <div *ngIf="numCtrl?.errors && (numCtrl?.dirty || numCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="numCtrl?.hasError('required')">
+        El número de cédula es requerido
+      </div>
+
+    </div>
+
     <p>
         Fecha: <br>
         <input type="date" formControlName = "dateCtrl">
     </p>
+
+    <div *ngIf="dateCtrl?.errors && (dateCtrl?.dirty || dateCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="dateCtrl?.hasError('required')">
+        Debe selecionar la fecha de nacimiento
+      </div>
+
+    </div>
+
     <p>
         Email: <br>
         <input type="email" formControlName = "emailCtrl">
     </p>
 
-    <p>
-        Texto largo: <br>
-        <textarea cols="30" rows="10"  formControlName = "textCtrl"></textarea> <br>
-        <small>{{textField?.value.length}}/200</small>
-    </p>
-    <div *ngIf="textField?.errors && form.get('textCtrl')?.touched">
-        <p *ngIf="textField?.hasError('required')">Es un campo requerido</p>
-        <p *ngIf="textField?.hasError('maxlength')">Te pasaste, máximo debe contener 200 caracteres.</p>
+    <div *ngIf="emailCtrl?.errors && (emailCtrl?.dirty || emailCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="emailCtrl?.hasError('required')">
+        Debe ingresar un correo electronico
+      </div>
+
     </div>
+
     <p>
-        Categoría: <br>
-        <select formControlName="categoryCtrl">
-            <option value="1">Categoria 1</option>
-            <option value="2">Categoria 2</option>
-            <option value="3">Categoria 3</option>
-            <option value="4">Categoria 4</option>
+        Pais de residencia <br>
+        <select formControlName="paisesCtrl">
+            <option value="Ecuador">Ecuador</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Brasil">Brasil</option>
         </select>
     </p>
+
+    <div *ngIf="paisesCtrl?.errors && (paisesCtrl?.dirty || paisesCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="paisesCtrl?.hasError('required')">
+        No selecciono ningun país
+      </div>
+
+    </div>
 
     <p>
         <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="hombre">Hombre <br>
         <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="mujer">Mujer <br>
         <input type="radio" name="genderCtrl" formControlName="genderCtrl" value="otro">Otros <br>
     </p>
+    <div *ngIf="genderCtrl?.errors && (genderCtrl?.dirty || genderCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="genderCtrl?.hasError('required')">
+        No selecciono ningun genero
+      </div>
+
+    </div>
+
+    <p>
+        Bibliografia: <br>
+        <textarea cols="30" rows="10"  formControlName = "bibliografiaCtrl"></textarea> <br>
+        <small>{{textField?.value.length}}/1000</small>
+    </p>
+    <div *ngIf="textField?.errors && (textField?.touched || textField?.dirty)">
+        <p *ngIf="textField?.hasError('required')">Es un campo requerido</p>
+        <p *ngIf="textField?.hasError('maxlength')">Te pasaste, máximo debe contener 1000 caracteres.</p>
+        <p *ngIf="textField?.hasError('minlength')">Te falta, minimo debe contener 100 caracteres.</p>
+    </div>
+    <p>
+        <input type="checkbox" value="Terminos" formControlName = "terminosCtrl"> Terminos y condiciones
+    </p>
+
+    <div *ngIf="terminosCtrl?.errors && (terminosCtrl?.dirty || terminosCtrl?.touched)"
+        class="alert">
+
+      <div *ngIf="terminosCtrl?.hasError('required')">
+       No Acepto los terminos y condiciones
+      </div>
+
+    </div>
+
+    <div [hidden]="captcha">
+      <p>Hola resuelve si eres humano</p>
+      <re-captcha (resolved)="resolved($event)"   siteKey="6LdAYEQjAAAAANdMHwSFZrGFx-pU1NcaEXt0JYcB"> </re-captcha>
+    </div>
+    <div [hidden]="!captcha">
+      <p>No eres robot puedes Guardar tus datos</p>
+    </div>
+
     <button type="submit">Guardar</button>
+
 
 </form>
